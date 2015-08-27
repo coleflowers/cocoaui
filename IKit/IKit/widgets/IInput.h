@@ -13,12 +13,14 @@
 
 + (IInput *)textInput;
 + (IInput *)passwordInput;
++ (IInput *)numberInput;
 
 @property (nonatomic, readonly) UITextField *textField;
 @property (nonatomic) NSString *value;
 @property (nonatomic) NSString *placeholder;
 
 - (BOOL)isPasswordInput;
+- (BOOL)isNumberInput;
 - (void)setIsPasswordInput:(BOOL)yesno;
 
 @end

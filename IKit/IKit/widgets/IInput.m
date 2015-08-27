@@ -13,7 +13,8 @@
 
 typedef enum{
 	IInputText,
-	IInputPassword
+	IInputPassword,
+	IInputNumber,
 }IInputType;
 
 @interface IInput () <UITextFieldDelegate>{
@@ -35,6 +36,13 @@ typedef enum{
 + (IInput *)passwordInput{
 	IInput *ret = [[self alloc] init];
 	ret.isPasswordInput = YES;
+	return ret;
+}
+
++ (IInput *)numberInput{
+	IInput *ret = [[self alloc] init];
+	ret.isNumberInput = YES;
+	ret.isPasswordInput = NO;
 	return ret;
 }
 
@@ -63,6 +71,15 @@ typedef enum{
 - (void)setIsPasswordInput:(BOOL)yesno{
 	_type = yesno? IInputPassword : IInputText;
 	_textField.secureTextEntry = yesno;
+}
+
+- (BOOL)isNumberInput{
+	return (_type == IInputNumber);
+}
+
+- (void)setIsNumberInput:(BOOL)yesno{
+	_type = yesno? IInputNumber : IInputText;
+	_textField.keyboardType = UIKeyboardTypeNumberPad;
 }
 
 - (NSString *)value{
